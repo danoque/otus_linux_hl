@@ -1,0 +1,19 @@
+---
+  - name: Install nginx
+    package:
+      name: "nginx"
+      state: present
+
+  - name: Check nginx configs
+    shell: /usr/sbin/nginx -t
+
+  - name: Reload nginx
+    service:
+      name: nginx
+      state: reloaded
+
+  - name: Make sure nginx is started
+    systemd:
+      state: started
+      enabled: yes
+      name: nginx
