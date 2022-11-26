@@ -1,0 +1,7 @@
+zone = "a"
+service_account_key_file = "b"
+folder_id = "c"
+image_id = "d"
+public_key_path = "e"
+subnet_id = "f"
+

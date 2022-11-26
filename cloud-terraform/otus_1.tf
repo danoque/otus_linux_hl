@@ -8,9 +8,9 @@ terraform {
 }
 
 provider "yandex" {
-  zone = "ru-central1-a"
-  service_account_key_file = "/home/daniil/OTUS/key.json"
-  folder_id = "b1go7pq0c5r5n54tpjj3"
+  zone = var.zone
+  service_account_key_file = var.service_account_key_file
+  folder_id = var.folder_id
 }
 resource "yandex_compute_instance" "terraform-first" {
   name = "terraform-first"
@@ -21,15 +21,15 @@ resource "yandex_compute_instance" "terraform-first" {
 }
   boot_disk {
     initialize_params {
-      image_id = "fd89jk9j9vifp28uprop"   
+      image_id = var.image_id   
     }
 
   }
   metadata = {
-    ssh-keys = "ubuntu:${file("~/.ssh/id_ed25519.pub")}"
+   ssh-keys = "ubuntu:${file(var.public_key_path)}"
   }
   network_interface {
-    subnet_id = "e9bbn4t2n1m995m76cbi"
+    subnet_id = var.subnet_id
     nat = true
   }
 }
