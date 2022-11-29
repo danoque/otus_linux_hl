@@ -1,4 +1,4 @@
-1) Начинаем писать Terraform файл
+1) Начинаем писать Terraform файл, пользуемся Яндекс провайдером
 ```
 terraform {
   required_providers {
@@ -18,14 +18,21 @@ provider "yandex" {
   folder_id = var.folder_id
 }
 ```
-5) С помощью outputs.tf попросим Terraforn вывести в консоль необходимые нам данные о созданной машине:
+5) С помощью outputs.tf попросим Terraform вывести в консоль необходимые нам данные о созданной машине:
 ```
 output "external_ip_address_app" {
   value = yandex_compute_instance.terraform-first.network_interface.0.nat_ip_address
 }
 ```
 7) Terraform  plan - планируем изменения, делаем финальную проверку создаваемого ресурса
-8) Terradorm apply - создаём ресурс
+8) Terradorm apply - создаём ресурс и видим успешный вывод с нашим outputs
+```
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+external_ip_address_app = "51.250.67.179"
+```
 10) Пишем Ansible плейбук для provison nginx, опишем здесь только самое главное - роль nginx, а в hosts укажем IP из вывода Terraform
 ```
 ---
