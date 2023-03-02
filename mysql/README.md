@@ -297,6 +297,7 @@ SELECT * FROM global_variables WHERE variable_name LIKE 'mysql-monitor_%';
 
 mysql> SELECT * FROM global_variables WHERE variable_name LIKE 'mysql-monitor_%';
 ```
+```
 +----------------------------------------------------------------------+----------------+
 | variable_name                                                        | variable_value |
 +----------------------------------------------------------------------+----------------+
@@ -338,12 +339,13 @@ mysql> SELECT * FROM global_variables WHERE variable_name LIKE 'mysql-monitor_%'
 | mysql-monitor_read_only_timeout                                      | 500            |
 +----------------------------------------------------------------------+----------------+
 36 rows in set (0.00 sec)
-
+```
 ```
 SELECT * FROM monitor.mysql_server_connect_log ORDER BY time_start_us DESC LIMIT 6;
 ```
 ```
 mysql> SELECT * FROM monitor.mysql_server_connect_log ORDER BY time_start_us DESC LIMIT 6;
+```
 ```
 +-------------+------+------------------+-------------------------+---------------+
 | hostname    | port | time_start_us    | connect_success_time_us | connect_error |
@@ -356,7 +358,7 @@ mysql> SELECT * FROM monitor.mysql_server_connect_log ORDER BY time_start_us DES
 | 10.129.0.34 | 3306 | 1677436072495526 | 0                       |               |
 +-------------+------+------------------+-------------------------+---------------+
 6 rows in set (0.00 sec)
-
+```
 **Creating ProxySQL Client User**
 ```
 INSERT INTO mysql_users (username,password) VALUES ('sbuser','Otus321$');
