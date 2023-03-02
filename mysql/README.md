@@ -61,20 +61,12 @@ password="Otus321$"
 mysql
 > show status like 'wsrep%';
 ```
+```
 ....
 | wsrep_cluster_state_uuid         | fdfa1d6b-b5f9-11ed-8ec1-2ee8bd42f1e6                                                                                                           |
 | wsrep_cluster_status             | Primary                                                                                                                                        |
-| wsrep_connected                  | ON                                                                                                                                             |
-| wsrep_local_bf_aborts            | 0                                                                                                                                              |
-| wsrep_local_index                | 0                                                                                                                                              |
-| wsrep_provider_capabilities      | :MULTI_MASTER:CERTIFICATION:PARALLEL_APPLYING:TRX_REPLAY:ISOLATION:PAUSE:CAUSAL_READS:INCREMENTAL_WRITESET:UNORDERED:PREORDERED:STREAMING:NBO: |
-| wsrep_provider_name              | Galera                                                                                                                                         |
-| wsrep_provider_vendor            | Codership Oy <info@codership.com> (modified by Percona <https://percona.com/>)                                                                 |
-| wsrep_provider_version           | 4.12(e167906)                                                                                                                                  |
-| wsrep_ready                      | ON                                                                                                                                             |
-| wsrep_thread_count               | 9                                                                                                                                              |
-+----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
-79 rows in set (0.02 sec)
+| wsrep_connected                  | ON      
+```
 
 **Добавим другие ноды**
 -- https://www.percona.com/doc/percona-xtradb-cluster/8.0/add-node.html#add-node
@@ -210,6 +202,7 @@ mysql -u admin -padmin -h 127.0.0.1 -P 6032
 > SHOW DATABASES;
 mysql> SHOW DATABASES;
 ```
+```
 +-----+---------------+-------------------------------------+
 | seq | name          | file                                |
 +-----+---------------+-------------------------------------+
@@ -220,6 +213,7 @@ mysql> SHOW DATABASES;
 | 5   | stats_history | /var/lib/proxysql/proxysql_stats.db |
 +-----+---------------+-------------------------------------+
 5 rows in set (0.00 sec)
+```
 > SHOW TABLES;
 Не забываем указать ip
 ```
@@ -269,48 +263,13 @@ CREATE USER 'proxysql'@'%' IDENTIFIED WITH mysql_native_password by 'Otus321$';
 CREATE USER 'proxysql'@'%' IDENTIFIED WITH caching_sha2_password by 'Otus321$';
 SELECT * FROM mysql.user\G
 ```
-*************************** 1. row ***************************
+*************************** 1. row ********
                     Host: %
                     User: proxysql
-             Select_priv: N
-             Insert_priv: N
-             Update_priv: N
-             Delete_priv: N
-             Create_priv: N
-               Drop_priv: N
-             Reload_priv: N
-           Shutdown_priv: N
-            Process_priv: N
-               File_priv: N
-              Grant_priv: N
-         References_priv: N
-              Index_priv: N
-              Alter_priv: N
-            Show_db_priv: N
-              Super_priv: N
-   Create_tmp_table_priv: N
-        Lock_tables_priv: N
-            Execute_priv: N
-         Repl_slave_priv: N
-        Repl_client_priv: N
-        Create_view_priv: N
-          Show_view_priv: N
-     Create_routine_priv: N
-      Alter_routine_priv: N
-        Create_user_priv: N
-              Event_priv: N
-            Trigger_priv: N
-  Create_tablespace_priv: N
-                ssl_type: 
-              ssl_cipher: 0x
-             x509_issuer: 0x
-            x509_subject: 0x
-           max_questions: 0
-             max_updates: 0
-         max_connections: 0
-    max_user_connections: 0
+...
+...
+...
                   plugin: mysql_native_password
-   authentication_string: *B0C45F304FAE1091CF5AFD07BCD414C905E98C8B
         password_expired: N
    password_last_changed: 2023-02-26 18:21:10
        password_lifetime: NULL
@@ -386,16 +345,16 @@ SELECT * FROM monitor.mysql_server_connect_log ORDER BY time_start_us DESC LIMIT
 ```
 mysql> SELECT * FROM monitor.mysql_server_connect_log ORDER BY time_start_us DESC LIMIT 6;
 ```
-+-------------+------+------------------+-------------------------+-------------------------------------------------------------------------------------+
-| hostname    | port | time_start_us    | connect_success_time_us | connect_error                                                                       |
-+-------------+------+------------------+-------------------------+-------------------------------------------------------------------------------------+
-| 10.129.0.34 | 3306 | 1677436084853384 | 1381                    | NULL                                                                                |
-| 10.129.0.28 | 3306 | 1677436084302915 | 1445                    | NULL                                                                                |
-| 10.129.0.30 | 3306 | 1677436083752372 | 1346                    | NULL                                                                                |
-| 10.129.0.28 | 3306 | 1677436073661610 | 0                       | Access denied for user 'monitor'@'pxcps.ru-central1.internal' (using password: YES) |
-| 10.129.0.30 | 3306 | 1677436073078534 | 0                       | Access denied for user 'monitor'@'pxcps.ru-central1.internal' (using password: YES) |
-| 10.129.0.34 | 3306 | 1677436072495526 | 0                       | Access denied for user 'monitor'@'pxcps.ru-central1.internal' (using password: YES) |
-+-------------+------+------------------+-------------------------+-------------------------------------------------------------------------------------+
++-------------+------+------------------+-------------------------+---------------+
+| hostname    | port | time_start_us    | connect_success_time_us | connect_error |
++-------------+------+------------------+-------------------------+---------------+
+| 10.129.0.34 | 3306 | 1677436084853384 | 1381                    | NULL          |
+| 10.129.0.28 | 3306 | 1677436084302915 | 1445                    | NULL          |
+| 10.129.0.30 | 3306 | 1677436083752372 | 1346                    | NULL          |
+| 10.129.0.28 | 3306 | 1677436073661610 | 0                       |               |
+| 10.129.0.30 | 3306 | 1677436073078534 | 0                       |               |
+| 10.129.0.34 | 3306 | 1677436072495526 | 0                       |               |
++-------------+------+------------------+-------------------------+---------------+
 6 rows in set (0.00 sec)
 
 **Creating ProxySQL Client User**
