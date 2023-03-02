@@ -1,39 +1,46 @@
--- Развернем 3 ВМ для кластера PXC
--- --zone=europe-north1-a
+**Развернем 3 ВМ для кластера PXC в yandex cloud с помощью веб-интерфейса**
 
--- подготовим репозиторий
--- https://www.percona.com/doc/percona-repo-config/percona-release.html#deb-based-gnu-linux-distributions
+**подготовим репозиторий**
+[https://www.percona.com/doc/percona-repo-config/percona-release.html#deb-based-gnu-linux-distributions](https://www.percona.com/doc/percona-repo-config/percona-release.html#deb-based-gnu-linux-distributions)
 
--- pxc1
+**на pxc1**
+```
 ssh pxc@51.250.14.124
-
+```
+```
 sudo apt update && sudo apt install -y wget gnupg2 lsb-release
 wget https://repo.percona.com/apt/percona-release_latest.generic_all.deb
 sudo dpkg -i percona-release_latest.generic_all.deb
-
--- установим кластер
--- https://www.percona.com/doc/percona-xtradb-cluster/8.0/install/apt.html#apt
+```
+**установим кластер**
+https://www.percona.com/doc/percona-xtradb-cluster/8.0/install/apt.html#apt
+```
 sudo percona-release enable-only pxc-80 release
 sudo percona-release enable tools release
 sudo apt update
 sudo apt install percona-xtradb-cluster -y
--- пароль Otus321$
-
--- ПОвторим на 
+-- пароль Otus321$ --- 
+```
+**Повторим на остальных серверах** 
 ssh pxc@51.250.74.213 - pxc2 и 
 ssh pxc@51.250.93.154 - pxc3
+```
 sudo apt update && sudo apt install -y wget gnupg2 lsb-release && wget https://repo.percona.com/apt/percona-release_latest.generic_all.deb && sudo dpkg -i percona-release_latest.generic_all.deb && sudo percona-release enable-only pxc-80 release && sudo percona-release enable tools release && sudo apt update && sudo apt install percona-xtradb-cluster -y 
-
--- сконфигурируем кластер
+```
+**Cконфигурируем кластер**
 -- https://www.percona.com/doc/percona-xtradb-cluster/8.0/configure.html#configure
 Первым шагом необходимо на каждой ноде остановить mysql
+```
 sudo service mysql stop
-В конфигурации sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
-
+```
+В конфигурации 
+```
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+```
 зададим ip !!! внутренней сети !!! и имя ноды
-
+```
 wsrep_cluster_address=gcomm://10.129.0.30,10.129.0.28,10.129.0.34
-
+```
 wsrep_node_name=pxc1
 
 Бутстрапим 1 ноду
