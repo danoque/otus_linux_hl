@@ -145,9 +145,7 @@ systemctl start mysql
 | wsrep_cluster_status             | Primary                                                                                                                                        |
 | wsrep_connected                  | ON                                                                                                                                             |
 | wsrep_local_bf_aborts            | 0                                                                                                                                              |
-| wsrep_local_index                | 2                                                                                                                                              |
-| wsrep_provider_capabilities      | :MULTI_MASTER:CERTIFICATION:PARALLEL_APPLYING:TRX_REPLAY:ISOLATION:PAUSE:CAUSAL_READS:INCREMENTAL_WRITESET:UNORDERED:PREORDERED:STREAMING:NBO: |
-| wsrep_provider_name              | Galera                                                                                                                                         |
+| wsrep_local_index                | 2                                                                                   
 | wsrep_provider_vendor            | Codership Oy <info@codership.com> (modified by Percona <https://percona.com/>)                                                                 |
 | wsrep_provider_version           | 4.12(e167906)                                                                                                                                  |
 | wsrep_ready                      | ON                                                                                                                                             |
