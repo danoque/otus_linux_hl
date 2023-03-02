@@ -139,20 +139,13 @@ systemctl start mysql
 
 > show status like 'wsrep%';
 ```
+```
 | wsrep_cluster_conf_id            | 3                                                                                                                                              |
 | wsrep_cluster_size               | 3                                                                                                                                              |
 | wsrep_cluster_state_uuid         | fdfa1d6b-b5f9-11ed-8ec1-2ee8bd42f1e6                                                                                                           |
 | wsrep_cluster_status             | Primary                                                                                                                                        |
-| wsrep_connected                  | ON                                                                                                                                             |
-| wsrep_local_bf_aborts            | 0                                                                                                                                              |
-| wsrep_local_index                | 2                                                                                   
-| wsrep_provider_vendor            | Codership Oy <info@codership.com> (modified by Percona <https://percona.com/>)                                                                 |
-| wsrep_provider_version           | 4.12(e167906)                                                                                                                                  |
-| wsrep_ready                      | ON                                                                                                                                             |
-| wsrep_thread_count               | 9                                                                                                                                              |
-+----------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
-79 rows in set (0.00 sec)
-
+| wsrep_connected                  | ON                                                                                                                   
+```
 **Также можно применить еще 2 варианта - общую папку для ключей**
 https://www.percona.com/blog/2020/05/18/percona-xtradb-cluster-8-0-behavior-change-for-pxc-encrypt-cluster-traffic/
 
