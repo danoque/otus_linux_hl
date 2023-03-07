@@ -1,0 +1,6 @@
+zone = "zone"
+service_account_key_file = "json"
+folder_id = "folder"
+image_id = "image"
+public_key_path = "key"
+subnet_id = "id"

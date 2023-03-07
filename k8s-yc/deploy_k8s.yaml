@@ -1,8 +1,8 @@
 
 ---
 #Install and configure packages
-- import_playbook: tasks/kube-dependencies.yml
+- import_playbook: tasks/kube-dependencies.yaml
 #Configure master node
-- import_playbook: tasks/control-plane.yml
+- import_playbook: tasks/control-plane.yaml
 #Join worker node to cluster
-- import_playbook: tasks/workers.yml
+- import_playbook: tasks/workers.yaml

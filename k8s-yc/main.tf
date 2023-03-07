@@ -40,7 +40,7 @@ network_interface {
 }  
 
 metadata = {
-  ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
+  ssh-keys = "ubuntu:${file(var.public_key_path)}"
 }
 
 }
@@ -68,12 +68,12 @@ network_interface {
 }  
 
 metadata = {
-  ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
+  ssh-keys = "ubuntu:${file(var.public_key_path)}"
 }
 
 #connection {
 #user = "ubuntu"
-#private_key = file("~/.ssh/id_rsa")
+#private_key = file(var.public_key_path)
 #host = yandex_compute_instance.vm-gfs2[*].network_interface.0.nat_ip_address
 #}
 #provisioner "remote-exec" {
