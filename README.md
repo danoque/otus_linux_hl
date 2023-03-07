@@ -77,7 +77,7 @@ sudo apt-get install jq
 ```
 10) И из папки kube-dump выполнить
 ```
-sudo apt-get install jq
+./kube-dump dump -ca
 ```
 11) Вывод
 ```
