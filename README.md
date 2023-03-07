@@ -64,3 +64,27 @@ NAME           STATUS   ROLES           AGE     VERSION
 kubemaster     Ready    control-plane   3m42s   v1.26.2
 kubeworker-1   Ready    <none>          3m10s   v1.26.2
 ```
+9) Для бэкапа конфигурации кластера воспользуемся kube-dump
+```
+git clone https://github.com/WoozyMasta/kube-dump.git
+```
+9.1) Необходимо доустановить пакеты
+```
+sudo apt install bash git tar xz-utils gzip bzip2 curl
+sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+sudo chmod a+x /usr/local/bin/yq
+sudo apt-get install jq
+```
+10) И из папки kube-dump выполнить
+```
+sudo apt-get install jq
+```
+11) Вывод
+```
+Cluster kubernetes-admin@kubernetes resources dump completed
+  
+The repository is created in the /home/ubuntu/kube-dump/data/.git/ directory
+Changes commited with message: Kubernetes kubernetes-admin@kubernetes cluster data dumped at 2023.03.07_09-41 
+Archive /home/ubuntu/kube-dump/data/dump_2023.03.07_09-41.tar created
+Done! 9 task completed
+```
