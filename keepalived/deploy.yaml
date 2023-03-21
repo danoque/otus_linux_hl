@@ -1,0 +1,11 @@
+---
+- hosts: db
+  become: true
+  roles:
+    - db
+- hosts: web
+  become: true
+  roles:
+    - keepalived
+    - nginx 
+    - wordpress

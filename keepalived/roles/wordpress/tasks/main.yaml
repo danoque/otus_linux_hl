@@ -1,0 +1,54 @@
+---
+- name: Download WordPress
+  get_url: 
+    url: https://ru.wordpress.org/latest-ru_RU.zip
+    dest: /tmp/latest-ru_RU.zip 
+
+- name: Extract WordPress
+  unarchive:
+    src: /tmp/latest-ru_RU.zip
+    dest: /tmp
+    owner: www-data
+    group: www-data
+    copy: no
+  
+- name: Move WordPress install files
+  copy:
+    src: /tmp/wordpress/
+    dest: /srv/www/site.ru
+    remote_src: yes
+    owner: www-data
+    group: www-data
+    
+  ignore_errors: true
+
+- name: Copy wp-config.php
+  copy:
+    src: /srv/www/site.ru/wp-config-sample.php
+    dest: /srv/www/site.ru/wp-config.php
+    remote_src: yes
+    owner: www-data
+    group: www-data
+
+- name: Update WordPress config file
+  lineinfile:
+    dest: "/srv/www/site.ru/wp-config.php"
+    regexp: "database_name_here"
+    line: "define( 'DB_NAME', 'wordpress' );"
+- name: Update WordPress config file
+  lineinfile:
+    dest: "/srv/www/site.ru/wp-config.php"
+    regexp: "username_here"
+    line: "define( 'DB_USER', 'wordpress' );"
+- name: Update WordPress config file
+  lineinfile:
+    dest: "/srv/www/site.ru/wp-config.php"
+    regexp: "password_here"
+    line: "define( 'DB_PASSWORD', 'Otus123' );"
+- name: Update WordPress config file
+  lineinfile:
+    dest: "/srv/www/site.ru/wp-config.php"
+    regexp: "localhost"
+    line: "define( 'DB_HOST', '192.168.56.200' );"
+
+

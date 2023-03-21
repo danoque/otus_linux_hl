@@ -1,0 +1,32 @@
+---
+# tasks file for keepalived_install
+- name: Upgrade system
+  become: true
+  block:
+    - name: Change repository
+      shell: sed -i 's/archive.ubuntu.com/mirror.yandex.ru/g' /etc/apt/sources.list
+    - name: Update 
+      apt:
+        update_cache: true
+        upgrade: true
+
+- name: Install package
+  apt: 
+    name: keepalived
+    state: present
+
+- name: Copy keepalived.conf
+  copy:
+    src: keepalived.conf
+    dest: /etc/keepalived/keepalived.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: restart keepalived
+  service:
+    name: keepalived
+    state: restarted
+    enabled: true  
+
+
